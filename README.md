@@ -9,3 +9,5 @@ Installation
 
 Usage
 -----
+See the example script in [/example/server.js](https://github.com/drstearns/passport-uwshib/blob/master/example/server.js)
+
