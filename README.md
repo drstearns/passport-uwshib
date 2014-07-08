@@ -40,7 +40,7 @@ The example script then loads a public certificate and associated private key fr
     var publicCert = fs.readFileSync('./security/server-cert.pem', 'utf-8');
     var privateKey = fs.readFileSync('./security/server-pvk.pem', 'utf-8');
 
-These are used not only for the HTTPS server, but also to sign requests sent to the UW IdP. You can use [openssql](http://www.sslshopper.com/article-most-common-openssl-commands.html) to generate keys, certificate signing requests, or self-signed certificates. The UW IdP seems to require HTTPS, so you should get a signed certificate for your server before trying to register it.
+These are used not only for the HTTPS server, but also to sign requests sent to the UW IdP. You can use [openssl](http://www.sslshopper.com/article-most-common-openssl-commands.html) to generate keys, certificate signing requests, or self-signed certificates. The UW IdP seems to require HTTPS, so you should get a signed certificate for your server before trying to register it.
 
 The script continues by creating a typical Express application and registering the typical middleware. For more information on this, see the [Passport.js site](http://passportjs.org/).
 
