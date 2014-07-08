@@ -38,6 +38,8 @@ var httpsPort = process.env.HTTPSPORT || 443;
 
 //load public certificate and private key
 //used for HTTPS and for signing SAML requests
+//put these in a /security subdirectory with the following names,
+//or edit the paths used in the following lines
 var publicCert = fs.readFileSync('./security/server-cert.pem', 'utf-8');
 var privateKey = fs.readFileSync('./security/server-pvk.pem', 'utf-8');
 

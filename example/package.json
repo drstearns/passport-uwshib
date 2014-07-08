@@ -1,0 +1,14 @@
+{
+    "name": "test-uwshib",
+    "version": "0.0.1",
+    "dependencies": {
+        "passport-uwshib": "*",
+        "body-parser": "*",
+        "chalk": "*",
+        "cookie-parser": "*",
+        "express": "*",
+        "express-session": "*",
+        "morgan": "*",
+        "passport": "*"
+    }
+}
