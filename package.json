@@ -1,0 +1,31 @@
+{
+    "name": "passport-uwshib",
+    "version": "0.0.1",
+    "license": "MIT",
+    "keywords": [
+        "saml",
+        "shibboleth",
+        "sso",
+        "UW",
+        "University of Washington"
+    ],
+    "description": "Passport authentication strategy for University of Washington's Shibboleth service",
+    "homepage": "https://github.com/drstearns/passport-uwshib",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/drstearns/passport-uwshib"
+    },
+    "author": {
+        "name": "Dave Stearns",
+        "email": "dlsinfo@uw.edu",
+        "url": "https://ischool.uw.edu/people/faculty/dlsinfo"
+    },
+    "bugs": "https://github.com/drstearns/passport-uwshib/issues",
+    "main": "index.js",
+    "dependencies": {
+        "passport-saml": ">=0.5.2"
+    },
+    "engines": {
+        "node": ">=0.10.28"
+    }
+}
