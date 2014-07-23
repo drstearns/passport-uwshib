@@ -9,7 +9,13 @@ While registering, you must also specify which user profile attributes you want.
 
 Installation
 ------------
-    npm install passport-uwshib --save
+    npm install passport-uwshib
+
+or if using a [package.json file](https://www.npmjs.org/doc/package.json.html), add this line to your dependencies hash:
+
+    "passport-uwshib": "*"
+
+and do an `npm install` or `npm update` to get the most current version.
 
 Usage
 -----
@@ -40,7 +46,7 @@ The example script then loads a public certificate and associated private key fr
     var publicCert = fs.readFileSync('./security/server-cert.pem', 'utf-8');
     var privateKey = fs.readFileSync('./security/server-pvk.pem', 'utf-8');
 
-These are used not only for the HTTPS server, but also to sign requests sent to the UW IdP. You can use [openssl](http://www.sslshopper.com/article-most-common-openssl-commands.html) to generate keys, certificate signing requests, or self-signed certificates. The UW IdP seems to require HTTPS, so you should get a signed certificate for your server before trying to register it.
+These are used not only for the HTTPS server, but also to sign requests sent to the UW IdP. You can use [openssl](http://www.sslshopper.com/article-most-common-openssl-commands.html) to generate keys and certificate signing requests. The UW IdP seems to require that your server responds to HTTPS requests, so you should get a signed certificate for your server before trying to register it.
 
 The script continues by creating a typical Express application and registering the typical middleware. For more information on this, see the [Passport.js site](http://passportjs.org/).
 
@@ -67,7 +73,6 @@ You will typically want to use sessions to allow users to authenticate only once
     passport.deserializeUser(function(user, done){
         done(null, user);
     });
-
 
 Next, the script registers a few routes to handle login, the login callback, and the standard metadata. This module provides implementations for the metadata route, and you use passport.authenticate for the login and login callback routes. The login route will redirect the user to the UW single sign-on page, and the UW IdP will then redirect the user back to the login callback route.
 
