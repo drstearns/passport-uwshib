@@ -117,7 +117,7 @@ module.exports.Strategy = Strategy;
 module.exports.metadataRoute = function(strategy, publicCert) {
     return function(req, res) {
         res.type('application/xml');
-        res.send(200, strategy.generateServiceProviderMetadata(publicCert));
+        res.status(200).send(strategy.generateServiceProviderMetadata(publicCert));
     }
 } //metadataRoute
 
