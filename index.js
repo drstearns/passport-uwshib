@@ -32,7 +32,6 @@ const urls = {
 };
 
 //export the urls map
-//this keeps urls as a const so that clients can't modify
 module.exports.urls = urls;
 
 //map of possible profile attributes and what name
@@ -65,8 +64,6 @@ function convertProfileToUser(profile) {
             user[niceName] = profile[attr];
         }
     }
-
-    console.log('authenticated user: %j', user);
 
     return user;    
 }

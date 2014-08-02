@@ -3,7 +3,7 @@ Passport-UWShib
 
 Passport authentication strategy that works with the University of Washington's Shibboleth single-sign on service. This uses the fabulous [passport-saml](https://github.com/bergie/passport-saml) module for all the heavy lifting, but sets all the default options so that it works properly with the UW Shibboleth Identity Provider (IdP).
 
-Note that in order to use the UW IdP for authentication, you must [register your server](https://iam-tools.u.washington.edu/spreg/). During the registration process, it will attempt to gather your server's metadata via the route /Shibboleth.sso/Metadata. This module provides an implementation for that route, but you have to set that up in your main server script (see [/example/server.js](https://github.com/drstearns/passport-uwshib/blob/master/example/server.js)).
+Note that in order to use the UW IdP for authentication, **you must [register your server](https://iam-tools.u.washington.edu/spreg/)**. During the registration process, it will attempt to gather your server's metadata via the route /Shibboleth.sso/Metadata. This module provides an implementation for that route, but you have to set that up in your main server script (see [/example/server.js](https://github.com/drstearns/passport-uwshib/blob/master/example/server.js)).
 
 While registering, you must also specify which user profile attributes you want. See the [Guide to Attributes Available from the UW IdP](https://wiki.cac.washington.edu/display/infra/Guide+to+Attributes+Available+from+the+UW+IdP) for more information.
 
