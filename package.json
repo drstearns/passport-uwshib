@@ -1,6 +1,6 @@
 {
     "name": "passport-uwshib",
-    "version": "0.0.6",
+    "version": "0.1.0",
     "license": "MIT",
     "keywords": [
         "passport",
@@ -24,7 +24,7 @@
     "bugs": "https://github.com/drstearns/passport-uwshib/issues",
     "main": "index.js",
     "dependencies": {
-        "passport-saml": ">=0.5.2"
+        "passport-saml": ">=0.10.0"
     },
     "engines": {
         "node": ">=0.10.28"
