@@ -148,8 +148,15 @@ module.exports.ensureAuth = function(loginUrl) {
         if (req.isAuthenticated())
             return next();
         else {
-            req.session.authRedirectUrl = req.url;
-            res.redirect(loginUrl);            
+            if (req.session) {
+                req.session.authRedirectUrl = req.url;
+            }
+            else {
+                console.warn('passport-uwshib: No session property on request!'
+                    + ' Is your session store unreachable?')
+
+            }
+            res.redirect(loginUrl);
         }
     }
 };
@@ -183,9 +190,12 @@ module.exports.ensureAuth = function(loginUrl) {
  */
 module.exports.backToUrl = function(defaultUrl) {
     return function(req, res) {
-        var url = req.session.authRedirectUrl;
-        delete req.session.authRedirectUrl;
-        res.redirect(url || defaultUrl || '/');
+        var url = defaultUrl || '/';
+        if (req.session) {
+            url = req.session.authRedirectUrl;
+            delete req.session.authRedirectUrl;
+        }
+        res.redirect(url);
     }
 };
 
