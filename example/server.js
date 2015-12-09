@@ -1,4 +1,5 @@
-"use strict;"
+'use strict';
+
 /*
     Example script for the passport-uwshib module
 
@@ -66,6 +67,14 @@ var strategy = new uwshib.Strategy({
     privateKey: privateKey,
     callbackUrl: loginCallbackUrl,
     domain: domain
+    //If your server is not using time.u.washington.edu
+    //as its authoritative time server (including if your
+    //server is running within the NetID domain!), add
+    //the following property setting.
+    //This will allow for a small amount of
+    //skew between the clocks of the client and the server.
+    //
+    //acceptedClockSkewMs: 200
 });
 
 passport.use(strategy);
