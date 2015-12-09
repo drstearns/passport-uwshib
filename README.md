@@ -62,6 +62,10 @@ Then the script creates the UW Shibboleth Strategy, and tells Passport to use it
 
     passport.use(strategy);
 
+In addition to the properties shown above, you may also pass any [configuration properties accepted by the passport-saml library](https://github.com/bergie/passport-saml/blob/master/README.md#configure-strategy).
+
+**Note:** When the UW IdP sends back Shibboleth assertions, they contain timestamps that declare when and for how long those assertions are valid. The passport-saml library will compare these timestamps against your server's clock, and will not allow any time skewing by default. If your server's clock is not synchronized with the UW IdP server, you may want to add the `acceptedClockSkewMs` property to the object you pass to the `uwshib.Strategy()` constructor. This property is defined and interpreted by the passport-saml library, and may be set to a number of milliseconds that the clocks are allowed to be off from one another. If you don't want any timestamp checking at all, you may set this property to `-1`. See the [passport-saml configuration properties](https://github.com/bergie/passport-saml/blob/master/README.md#configure-strategy) for more details.
+
 The name of the strategy is `'uwsaml'`, but you can use the `.name` property of the Strategy to refer to that.
 
 You will typically want to use sessions to allow users to authenticate only once per-sesion. The next functions are called by Passport to serialize and deserialize the user to the session. As noted in the comments, you would typically want to serialize only the unique ID (`.netID`) and reconstitute the user from your database during deserialzie. But to keep things simple, the script serializes the entire user and deserializes it again.
