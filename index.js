@@ -47,7 +47,8 @@ var profileAttrs = {
     'urn:oid:2.5.4.4': 'surname',
     'urn:oid:2.5.4.12': 'title',
     'urn:oid:1.2.840.113994.200.21': 'studentId',
-    'urn:oid:1.2.840.113994.200.24': 'regId'
+    'urn:oid:1.2.840.113994.200.24': 'regId',
+    'urn:oid:1.3.6.1.4.1.5923.1.5.1.1': 'gws_groups'
 };
 
 function verifyProfile(profile, done) {
