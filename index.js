@@ -30,7 +30,6 @@ module.exports.urls = {
 };
 
 //map of possible profile attributes and what name
-//map of possible profile attributes and what name
 //we should give them on the resulting user object
 //add to this with other attrs if you request them
 var profileAttrs = {
