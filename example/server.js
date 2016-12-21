@@ -63,7 +63,9 @@ app.use(passport.session());
 
 //create the UW Shibboleth Strategy and tell Passport to use it
 var strategy = new uwshib.Strategy({
-    entityId: domain,
+    //the UW spreg tool wants the full website URL as the entity ID
+    //so add the `https://` protocol to your domain name
+    entityId: 'https://' + domain,
     privateKey: privateKey,
     callbackUrl: loginCallbackUrl,
     domain: domain
