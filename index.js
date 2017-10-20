@@ -51,10 +51,10 @@ var profileAttrs = {
 };
 
 function verifyProfile(profile, done) {
-    if (!profile)
+    if (!profile) {
         return done(new Error('Empty SAML profile returned!'));
-    else
-        return done(null, convertProfileToUser(profile));
+    }
+    return done(null, convertProfileToUser(profile));
 }
 
 function convertProfileToUser(profile) {
@@ -72,7 +72,7 @@ function convertProfileToUser(profile) {
         }
     }
 
-    return user;    
+    return user;
 }
 
 /**
@@ -130,7 +130,7 @@ module.exports.metadataRoute = function(strategy, publicCert) {
     return function(req, res) {
         res.type('application/xml');
         res.status(200).send(strategy.generateServiceProviderMetadata(publicCert));
-    }
+    };
 }; //metadataRoute
 
 /**
@@ -153,12 +153,12 @@ module.exports.ensureAuth = function(loginUrl) {
             }
             else {
                 console.warn('passport-uwshib: No session property on request!'
-                    + ' Is your session store unreachable?')
+                    + ' Is your session store unreachable?');
 
             }
             res.redirect(loginUrl);
         }
-    }
+    };
 };
 
 /*
@@ -196,6 +196,6 @@ module.exports.backToUrl = function(defaultUrl) {
             delete req.session.authRedirectUrl;
         }
         res.redirect(url);
-    }
+    };
 };
 
