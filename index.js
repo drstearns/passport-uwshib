@@ -149,7 +149,7 @@ module.exports.ensureAuth = function(loginUrl) {
             return next();
         else {
             if (req.session) {
-                req.session.authRedirectUrl = req.url;
+                req.session.authRedirectUrl = req.originalUrl;
             }
             else {
                 console.warn('passport-uwshib: No session property on request!'
