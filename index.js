@@ -30,7 +30,6 @@ module.exports.urls = {
 };
 
 //map of possible profile attributes and what name
-//map of possible profile attributes and what name
 //we should give them on the resulting user object
 //add to this with other attrs if you request them
 var profileAttrs = {
@@ -47,14 +46,15 @@ var profileAttrs = {
     'urn:oid:2.5.4.4': 'surname',
     'urn:oid:2.5.4.12': 'title',
     'urn:oid:1.2.840.113994.200.21': 'studentId',
-    'urn:oid:1.2.840.113994.200.24': 'regId'
+    'urn:oid:1.2.840.113994.200.24': 'regId',
+    'urn:oid:1.3.6.1.4.1.5923.1.5.1.1': 'gwsGroups'
 };
 
 function verifyProfile(profile, done) {
-    if (!profile)
+    if (!profile) {
         return done(new Error('Empty SAML profile returned!'));
-    else
-        return done(null, convertProfileToUser(profile));
+    }
+    return done(null, convertProfileToUser(profile));
 }
 
 function convertProfileToUser(profile) {
@@ -72,7 +72,7 @@ function convertProfileToUser(profile) {
         }
     }
 
-    return user;    
+    return user;
 }
 
 /**
@@ -130,7 +130,7 @@ module.exports.metadataRoute = function(strategy, publicCert) {
     return function(req, res) {
         res.type('application/xml');
         res.status(200).send(strategy.generateServiceProviderMetadata(publicCert));
-    }
+    };
 }; //metadataRoute
 
 /**
@@ -153,12 +153,12 @@ module.exports.ensureAuth = function(loginUrl) {
             }
             else {
                 console.warn('passport-uwshib: No session property on request!'
-                    + ' Is your session store unreachable?')
+                    + ' Is your session store unreachable?');
 
             }
             res.redirect(loginUrl);
         }
-    }
+    };
 };
 
 /*
@@ -196,6 +196,6 @@ module.exports.backToUrl = function(defaultUrl) {
             delete req.session.authRedirectUrl;
         }
         res.redirect(url);
-    }
+    };
 };
 

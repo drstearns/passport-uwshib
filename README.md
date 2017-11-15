@@ -3,7 +3,7 @@ Passport-UWShib
 
 Passport authentication strategy that works with the University of Washington's Shibboleth single-sign on service. This uses the fabulous [passport-saml](https://github.com/bergie/passport-saml) module for all the heavy lifting, but sets all the default options so that it works properly with the UW Shibboleth Identity Provider (IdP).
 
-Note that in order to use the UW IdP for authentication, **you must [register your server](https://iam-tools.u.washington.edu/spreg/)**. During the registration process, it will attempt to gather your server's metadata via the route /Shibboleth.sso/Metadata. This module provides an implementation for that route, but you have to set that up in your main server script (see [/example/server.js](https://github.com/drstearns/passport-uwshib/blob/master/example/server.js)).
+Note that in order to use the UW IdP for authentication, **you must [register your server](https://iam-tools.u.washington.edu/spreg/)**. During the registration process, it will attempt to gather your server's metadata via the route `/Shibboleth.sso/Metadata`. This module provides an implementation for that route, but you have to set that up in your main server script (see [/example/server.js](https://github.com/drstearns/passport-uwshib/blob/master/example/server.js)).
 
 While registering, you must also specify which user profile attributes you want. See the [Guide to Attributes Available from the UW IdP](https://wiki.cac.washington.edu/display/infra/Guide+to+Attributes+Available+from+the+UW+IdP) for more information.
 
@@ -26,7 +26,7 @@ This module provides a Strategy for the [Passport](http://passportjs.org/) frame
     var http = require('http');                     //http server
     var https = require('https');                   //https server
     var fs = require('fs');                         //file system
-    var express = require("express");               //express middleware
+    var express = require('express');               //express middleware
     var morgan = require('morgan');                 //logger for express
     var bodyParser = require('body-parser');        //body parsing middleware
     var cookieParser = require('cookie-parser');    //cookie parsing middleware
@@ -62,6 +62,10 @@ Then the script creates the UW Shibboleth Strategy, and tells Passport to use it
 
     passport.use(strategy);
 
+In addition to the properties shown above, you may also pass any [configuration properties accepted by the passport-saml library](https://github.com/bergie/passport-saml/blob/master/README.md#configure-strategy).
+
+**Note:** When the UW IdP sends back Shibboleth assertions, they contain timestamps that declare when and for how long those assertions are valid. The passport-saml library will compare these timestamps against your server's clock, and will not allow any time skewing by default. If your server's clock is not synchronized with the UW IdP server, you may want to add the `acceptedClockSkewMs` property to the object you pass to the `uwshib.Strategy()` constructor. This property is defined and interpreted by the passport-saml library, and may be set to a number of milliseconds that the clocks are allowed to be off from one another. If you don't want any timestamp checking at all, you may set this property to `-1`. See the [passport-saml configuration properties](https://github.com/bergie/passport-saml/blob/master/README.md#configure-strategy) for more details.
+
 The name of the strategy is `'uwsaml'`, but you can use the `.name` property of the Strategy to refer to that.
 
 You will typically want to use sessions to allow users to authenticate only once per-sesion. The next functions are called by Passport to serialize and deserialize the user to the session. As noted in the comments, you would typically want to serialize only the unique ID (`.netID`) and reconstitute the user from your database during deserialzie. But to keep things simple, the script serializes the entire user and deserializes it again.
@@ -87,7 +91,7 @@ Lastly, the script tells Express to use the `ensureAuth()` middleware provided b
     //secure all routes following this
     app.use(uwshib.ensureAuth(loginUrl));
 
-Any route requested after this middleware will require authentication. When requested, those routes will automatically redirect to the `loginUrl` if the user has not already authenticated. After successful authentication, the browser will be redirected back to the original URL, and the user information will be available via the `.user` property on the request object.
+Any route requested after this middleware will require authentication. When requested, those routes will automatically redirect to the `loginUrl` if the user has not already authenticated. After successful authentication, the browser will be redirected back to the original URL, and the user information will be available via the `req.user` object.
 
 Note that `ensureAuth` can also be used to selectively secure routes. For example:
 
