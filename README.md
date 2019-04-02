@@ -11,12 +11,6 @@ Installation
 ------------
     npm install passport-uwshib
 
-or if using a [package.json file](https://www.npmjs.org/doc/package.json.html), add this line to your dependencies hash:
-
-    "passport-uwshib": "*"
-
-and do an `npm install` or `npm update` to get the most current version.
-
 Usage
 -----
 There is a fully-working example server script in [/example/server.js](https://github.com/drstearns/passport-uwshib/blob/master/example/server.js), and an associated [package.json](ttps://github.com/drstearns/passport-uwshib/blob/master/example/package.json), which you can use to install all the necessary packages to make the example script run (express, express middleware, passport, etc.). Refer to that as I explain what it is doing.
